@@ -4,20 +4,13 @@
   become: true
   tasks:
 
-    - name: update repo
+    - name: install apche and php package then update the cache.
       yum:
+        name: 
+          - "{{apache_package}}"
+          - "{{php_package}}"
+        state: latest
         update_cache: true
-        state: latest
-
-    - name: install apche1 package
-      yum:
-        name: httpd
-        state: latest
-
-    - name: install php package
-      dnf:
-        name: php
-        state: latest
 
     - name: ping the server
       ping:
