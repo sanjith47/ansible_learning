@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+
+  - name: create aryan user
+    user:
+      name: aryan
+      group: root
+  - name: add ssh key
+    authorized_key:
+      user: aryan
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmT+j5wel4sB8TTTO2Pmazd8rDBKZuGNI+aZDqZqQ9K ansible"
+  - name: add suoers file for aryan
+    copy:
+      src: sudoer_aryan
+      dest: /etc/sudoers.d/aryan
+      owner: root
+      group: root
+      mode: 0440
